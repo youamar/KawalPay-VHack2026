@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="zh">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>KawalPay - 终极演示</title>
+    <title>KawalPay - Live Demo</title>
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body class="bg-gray-100 flex items-center justify-center h-screen font-sans">
@@ -11,25 +11,25 @@
     <div class="bg-white w-96 rounded-3xl shadow-2xl overflow-hidden border-4 border-gray-800 relative">
         <div class="bg-green-600 p-6 text-white text-center">
             <h1 class="text-2xl font-bold tracking-wider">KawalPay</h1>
-            <p class="text-sm opacity-80 mt-1">转账给: Uncle Muthu</p>
+            <p class="text-sm opacity-80 mt-1">Transfer to: Uncle Muthu</p>
         </div>
 
         <div class="p-6">
             <h2 class="text-4xl font-bold text-center mb-8 text-gray-800">RM 500.00</h2>
             
-            <p class="text-xs text-gray-500 mb-3 text-center">👇 评委演示控制台 (Demo Console) 👇</p>
+            <p class="text-xs text-gray-500 mb-3 text-center">👇 Judges Demo Console 👇</p>
             
             <div class="space-y-3">
                 <button onclick="sendTransfer('SAFE')" class="w-full bg-blue-100 text-blue-700 font-bold py-3 rounded-xl hover:bg-blue-200 transition border border-blue-300">
-                    🟢 场景 1: 正常安全转账
+                    🟢 Scenario 1: Normal Safe Transfer
                 </button>
 
                 <button onclick="sendTransfer('SUSPICIOUS')" class="w-full bg-yellow-100 text-yellow-700 font-bold py-3 rounded-xl hover:bg-yellow-200 transition border border-yellow-300">
-                    🟡 场景 2: 异地登录 (触发动态验证)
+                    🟡 Scenario 2: Suspicious Anomaly (Dynamic Friction)
                 </button>
 
                 <button onclick="sendTransfer('ATTACK')" class="w-full bg-red-100 text-red-700 font-bold py-3 rounded-xl hover:bg-red-200 transition border border-red-300">
-                    🔴 场景 3: 遭受木马控制 (触发硬熔断)
+                    🔴 Scenario 3: Trojan/Hijack (Hard Block)
                 </button>
             </div>
         </div>
@@ -39,8 +39,8 @@
                 <div class="w-16 h-16 bg-yellow-100 rounded-full flex items-center justify-center mx-auto mb-4">
                     <span class="text-3xl">🛡️</span>
                 </div>
-                <h3 class="text-xl font-bold text-gray-800 mb-2">安全环境检测</h3>
-                <p class="text-gray-600 mb-6 text-sm">系统检测到异常登录环境。为了保护您的资金安全，请点击下方的 <br><strong class="text-green-600 text-xl tracking-widest mt-2 inline-block">椰浆饭 (Nasi Lemak)</strong></p>
+                <h3 class="text-xl font-bold text-gray-800 mb-2">Security Verification</h3>
+                <p class="text-gray-600 mb-6 text-sm">Unusual login environment detected. To protect your funds, please tap the <br><strong class="text-green-600 text-xl tracking-widest mt-2 inline-block">Nasi Lemak</strong></p>
                 
                 <div class="grid grid-cols-2 gap-4 mb-4 text-5xl">
                     <button onclick="fail()" class="bg-gray-50 p-4 rounded-xl hover:bg-red-100 transition border-2 border-transparent hover:border-red-300 active:scale-95">🍎</button>
@@ -56,19 +56,19 @@
         async function sendTransfer(scenario) {
             let payload = {};
             
-            // 根据不同场景，精准投喂不同的特征数据给 AI 大脑
+            // Feed different contextual features to the AI Brain based on the scenario
             if (scenario === 'SAFE') {
                 payload = { amount_myr: 50.0, is_new_payee: 0, is_pasted_from_clipboard: 0, is_rooted_or_jailbroken: 0, is_active_call_ongoing: 0, dwell_time_ms: 2000.0 };
             } else if (scenario === 'SUSPICIOUS') {
-                // 💡 猛料加倍：金额变大 + 账号是粘贴过来的 (极度可疑) + 页面停留了 15 秒
+                // Medium Risk: Larger amount + Pasted Account ID + Hesitation (15 seconds)
                 payload = { amount_myr: 3500.0, is_new_payee: 1, is_pasted_from_clipboard: 1, is_rooted_or_jailbroken: 0, is_active_call_ongoing: 0, dwell_time_ms: 15000.0 };
             } else if (scenario === 'ATTACK') {
-                // 制造极高风险：手机被黑，边打电话边转账
+                // Critical Risk: Device Rooted/Hijacked + Active Call (Social Engineering)
                 payload = { amount_myr: 5000.0, is_new_payee: 1, is_pasted_from_clipboard: 1, is_rooted_or_jailbroken: 1, is_active_call_ongoing: 1, dwell_time_ms: 50000.0 };
             }
 
             try {
-                // 向 FastAPI 发送数据
+                // Call our local FastAPI backend
                 const response = await fetch('http://127.0.0.1:8000/api/v1/evaluate_risk', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
@@ -77,30 +77,30 @@
                 
                 const result = await response.json();
                 
-                // 根据 AI 返回的结果，决定前端展现什么 UI
+                // Render UI based on AI risk assessment
                 if (result.action === 'APPROVE') {
-                    alert(`✅ 转账成功！\n模型风险评估: 低 (${result.risk_score_percentage}%)`);
+                    alert(`✅ Transfer Successful!\nAI Risk Assessment: Low (${result.risk_score_percentage}%)`);
                 } else if (result.action === 'CHALLENGE') {
-                    // ⭐️ 唤醒椰浆饭窗口！
+                    // ⭐️ Trigger the Dynamic Friction Modal!
                     document.getElementById('riskScoreDisplay').innerText = `KawalPay AI Score: ${result.risk_score_percentage}%`;
                     document.getElementById('challengeModal').classList.remove('hidden');
                 } else {
-                    alert(`🔴 警报：交易被系统物理熔断！\nAI判定为极高风险 (${result.risk_score_percentage}%)，建议立即冻结账户并报警。`);
+                    alert(`🔴 ALERT: Transaction blocked by hardware circuit breaker!\nAI assessed critical risk (${result.risk_score_percentage}%). Account frozen for your protection.`);
                 }
             } catch (error) {
-                alert('连接 API 失败！请检查 main.py 是否在运行，并且是否添加了 CORS 代码。');
+                alert('Connection to API failed! Please ensure main.py is running and CORS is configured.');
             }
         }
 
-        // 验证通过的逻辑
+        // Logic for passing the visual challenge
         function pass() {
-            alert('✅ 验证通过！您已证明是真人操作，转账继续执行。');
+            alert('✅ Verification Passed! Transfer is proceeding securely.');
             document.getElementById('challengeModal').classList.add('hidden');
         }
 
-        // 验证失败的逻辑
+        // Logic for failing the visual challenge
         function fail() {
-            alert('❌ 验证失败！操作已冻结。');
+            alert('❌ Verification Failed! Operation frozen.');
             document.getElementById('challengeModal').classList.add('hidden');
         }
     </script>
