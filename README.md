@@ -1,6 +1,6 @@
 # 🛡️ KawalPay: Edge-Based Fraud Shield for the Unbanked
 
-**Team Name:** VDreamer
+**Team Name:** VDreamer 
 **Varsity Hackathon 2026 (V HACK 2026) Submission** **Track:** Case Study 2 - Digital Trust (Real-Time Fraud Shield for the Unbanked)  
 **Primary Goal:** SDG 8: Decent Work and Economic Growth (Target 8.10)  
 
