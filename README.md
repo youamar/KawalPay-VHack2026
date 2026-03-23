@@ -1,5 +1,6 @@
 # 🛡️ KawalPay: Edge-Based Fraud Shield for the Unbanked
 
+**Team Name:** VDreamer
 **Varsity Hackathon 2026 (V HACK 2026) Submission** **Track:** Case Study 2 - Digital Trust (Real-Time Fraud Shield for the Unbanked)  
 **Primary Goal:** SDG 8: Decent Work and Economic Growth (Target 8.10)  
 
@@ -58,6 +59,6 @@ KawalPay operates on a **B2B2C** model. We provide our Risk Engine as a scalable
 
 **1. Clone and Install Dependencies**
 ```bash
-git clone [YOUR_GITHUB_REPO_LINK]
+git clone https://github.com/youamar/KawalPay-VHack2026
 cd KawalPay_Project
 pip install pandas scikit-learn xgboost imbalanced-learn fastapi uvicorn pydantic
